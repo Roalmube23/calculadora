@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./calc.js">
+    <link rel="stylesheet" href="./cals.css">
+</head>
+<body>
+
+    <div id="calculadora">
+        <input type="text" id="resultado" disabled>
+        <br>
+        <button onclick="concatenar('7')">7</button>
+        <button onclick="concatenar('8')">8</button>
+        <button onclick="concatenar('9')">9</button>
+        <button onclick="operacion('/')">/</button>
+        <br>
+        <button onclick="concatenar('4')">4</button>
+        <button onclick="concatenar('5')">5</button>
+        <button onclick="concatenar('6')">6</button>
+        <button onclick="operacion('*')">*</button>
+        <br>
+        <button onclick="concatenar('1')">1</button>
+        <button onclick="concatenar('2')">2</button>
+        <button onclick="concatenar('3')">3</button>
+        <button onclick="operacion('-')">-</button>
+        <br>
+        <button onclick="concatenar('0')">0</button>
+        <button onclick="concatenar('.')">.</button>
+        <button onclick="calcular()">=</button>
+        <button onclick="operacion('+')">+</button>
+        <br>
+        <button onclick="limpiar()">C</button>
+    </div>
+<script>
+            let valorActual = '';
+        let operacionPendiente = '';
+        let resultadoAnterior = 0;
+
+        function concatenar(digito) {
+            valorActual += digito;
+            document.getElementById('resultado').value = valorActual;
+        }
+
+        function limpiar() {
+            valorActual = '';
+            operacionPendiente = '';
+            resultadoAnterior = 0;
+            document.getElementById('resultado').value = '';
+        }
+
+        function operacion(operador) {
+            if (valorActual !== '') {
+                calcular();
+            }
+            operacionPendiente = operador;
+        }
+
+        function calcular() {
+            const valor = parseFloat(valorActual);
+            switch (operacionPendiente) {
+                case '+':
+                    resultadoAnterior += valor;
+                    break;
+                case '-':
+                    resultadoAnterior -= valor;
+                    break;
+                case '*':
+                    resultadoAnterior *= valor;
+                    break;
+                case '/':
+                    resultadoAnterior /= valor;
+                    break;
+                default:
+                    resultadoAnterior = valor;
+                    break;
+            }
+            document.getElementById('resultado').value = resultadoAnterior;
+            valorActual = '';
+        }
+</script>
+    
+
+</body>
+</html>
